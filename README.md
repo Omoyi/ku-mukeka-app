@@ -34,6 +34,11 @@ This is an [Expo](https://expo.dev) project SDK 51 created with [`create-expo-ap
    npx expo start --clear
    ```
 
+3. Delete App.js
+   
+   expo-router handles the app's entry point, so you can remove the App.js file.
+
+
 In the output, you'll find options to open the app in a
 
 - [development build](https://docs.expo.dev/develop/development-builds/introduction/)
