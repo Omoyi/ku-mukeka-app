@@ -1,107 +1,91 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, Dimensions, ImageBackground } from 'react-native';
-import ContributeIconSVG from './assets/ContributeIcon.svg';
-import ListenIconSVG from './assets/ListenIcon';
+import { View, Text, Image, TouchableOpacity, ImageBackground } from "react-native";
+import React, { useState } from "react";
 
-const { width, height } = Dimensions.get('window');
+export default function Homepage() {
+  const [language, setLanguage] = useState<"ENG" | "KIN">("ENG");
 
-// Placeholder SVG components - replace with your actual SVG icons
-const ContributeIcon = () => (
-  <View className="w-8 h-8 bg-white/30 rounded" />
-);
-
-const ListenIcon = () => (
-  <View className="w-8 h-8 bg-white/30 rounded" />
-);
-
-export default function HomeScreen() {
-  const handleContribute = () => {
-    // Navigate to contribution screen
-    console.log('Navigate to Contribute');
-  };
-
-  const handleListen = () => {
-    // Navigate to listening/library screen
-    console.log('Navigate to Listen');
+  // Switch labels based on language
+  const labels = {
+    ENG: {
+      titleLeft: "Ku Mukeka",
+      titleRight: "Let's Recount",
+      contribute: "Contribute Oral Tradition",
+      listen: "Listen to Oral Traditions",
+    },
+    KIN: {
+      titleLeft: "Ku Mukeka",
+      titleRight: "Duce Imigani",
+      contribute: "Gusangiza Abandi Inkuru",
+      listen: "Kumva imigani y'Inkuru",
+    },
   };
 
   return (
-    <View className="flex-1">
-      {/* Background Image */}
-      <ImageBackground
-        source={{ uri: './assets/main_bg' }}
+    <ImageBackground
+      source={require("../assets/main_bg.jpg")}
+      className="flex-1"
+      resizeMode="center"
+    >
+      {/* overlays */}
+      <View className="absolute inset-0 bg-black/6" />
+      <View className="absolute inset-0 bg-purple-700/40" />
+      <Image
+        source={require("../assets/Stars.png")}
+        className="absolute inset-0 w-full h-full"
         resizeMode="cover"
-      >
-        {/* Black Overlay */}
-        <View className=" " />
-        
-        {/* Blue Overlay */}
-        <View className="" />
-        {/* Header Section */}
-        <View className="flex-1 justify-center items-center px-6">
-          {/* Title */}
-          <View className="mb-8">
-            <Text className="text-white text-4xl md:text-6xl font-light text-center tracking-widest">
-              Ku Mukeka
+      />
+
+      <View className="flex-1 px-4 py-6">
+        {/* Language toggle */}
+        <TouchableOpacity
+          className="absolute top-6 right-6 bg-white/20 rounded-full px-3 py-1"
+          onPress={() => setLanguage(language === "ENG" ? "KIN" : "ENG")}
+        >
+          <Text className="text-white font-bold">{language}</Text>
+        </TouchableOpacity>
+
+        {/* Top grid */}
+        <View className="flex-col md:flex-row items-center justify-between gap-6 flex-1">
+          <Text className="text-white text-[32px] font-sankofa text-center">
+            {labels[language].titleLeft}
+          </Text>
+
+          <Image
+            source={require("../assets/Logo.png")}
+            className="w-40 h-40"
+            resizeMode="contain"
+          />
+
+          <Text className="text-white text-[32px] font-sankofa text-center">
+            {labels[language].titleRight}
+          </Text>
+        </View>
+
+        {/* Bottom grid */}
+        <View className="flex-col md:flex-row gap-6 mt-6">
+          <TouchableOpacity className="flex-1 bg-blue-600/60 rounded-xl p-6 items-center">
+            <Image
+              source={require("../assets/ContributeIcon.png")}
+              className="w-16 h-16 mb-4"
+              resizeMode="contain"
+            />
+            <Text className="text-white text-lg font-rethink">
+              {labels[language].contribute}
             </Text>
-            <Text className="text-white/80 text-lg md:text-xl text-center mt-2 tracking-wide">
-              Let's Recount
+          </TouchableOpacity>
+
+          <TouchableOpacity className="flex-1 bg-purple-600/60 rounded-xl p-6 items-center">
+            <Image
+              source={require("../assets/ListenIcon.png")}
+              className="w-16 h-16 mb-4"
+              resizeMode="contain"
+            />
+            <Text className="text-white text-lg font-rethink">
+              {labels[language].listen}
             </Text>
-          </View>
-
-          {/* Decorative Tree and People Silhouettes */}
-          <View className="flex-1 justify-center items-center mb-16">
-            
-          </View>
+          </TouchableOpacity>
         </View>
-
-        {/* Bottom Action Cards */}
-        <View className="absolute bottom-0 left-0 right-0 h-64 bg-white/10 backdrop-blur-sm">
-          <View className="flex-1 flex-row">
-            {/* Contribute Card */}
-            <TouchableOpacity 
-              onPress={handleContribute}
-              className="flex-1 justify-center items-center border-r border-white/20 active:bg-white/10"
-              style={{ minHeight: 200 }}
-            >
-              <View className="bg-white/20 rounded-full p-4 mb-4">
-                <ContributeIcon />
-              </View>
-              <Text className="text-white text-lg font-medium text-center px-4">
-                Contribute Oral Tradition
-              </Text>
-            </TouchableOpacity>
-
-            {/* Listen Card */}
-            <TouchableOpacity 
-              onPress={handleListen}
-              className="flex-1 justify-center items-center active:bg-white/10"
-              style={{ minHeight: 200 }}
-            >
-              <View className="bg-white/20 rounded-full p-4 mb-4">
-                <ListenIcon />
-              </View>
-              <Text className="text-white text-lg font-medium text-center px-4">
-                Listen to Oral Traditions
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        {/* Decorative Stars/Dots */}
-        <View className="absolute top-20 left-10">
-          <View className="w-1 h-1 bg-white/40 rounded-full" />
-        </View>
-        <View className="absolute top-32 right-16">
-          <View className="w-1 h-1 bg-white/40 rounded-full" />
-        </View>
-        <View className="absolute top-48 left-1/4">
-          <View className="w-1 h-1 bg-white/40 rounded-full" />
-        </View>
-        <View className="absolute top-64 right-1/3">
-          <View className="w-1 h-1 bg-white/40 rounded-full" />
-        </View>
-      </ImageBackground>
-    </View>
+      </View>
+    </ImageBackground>
   );
 }

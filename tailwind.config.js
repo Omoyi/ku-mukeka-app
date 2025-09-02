@@ -7,7 +7,12 @@ module.exports = {
   prtsesets: [require("nativewind/preset")],
   darkMode: "class",
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+      sankofa: ["sankofa"],
+      rethink: ["rethink"],
+    },
+    },
   },
   plugins: [],
 }
