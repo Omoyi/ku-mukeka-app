@@ -11,7 +11,12 @@ module.exports = {
       fontFamily: {
       sankofa: ["sankofa"],
       rethink: ["rethink"],
-    },
+      },
+      colors: {
+        primaryBlue: "#2140CD",
+        primaryPurple: "#5036D2",
+        secondaryPurple: "#7838D9",
+      },
     },
   },
   plugins: [],
