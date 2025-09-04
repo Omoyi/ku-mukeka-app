@@ -23,9 +23,9 @@ create table stories (
   language varchar(50),
   medium varchar(20),
   file_url text,
-  image_url text, -- ✅ added story image
+  image_url text, 
   transcription text,
-  moderation_status varchar(20) default 'pending', -- ✅ simplified enum to varchar
+  moderation_status varchar(20) default 'pending', 
   created_at timestamp default now(),
   updated_at timestamp default now()
 );
